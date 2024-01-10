@@ -1,8 +1,13 @@
-# React + Vite
+# Anecdotes -redux application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# redux application look
 
-Currently, two official plugins are available:
+![Redux Appliction](image.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Code Implemented and things have been leanred from this project
+
+1. ✅ voting function with redux.
+2. ✅ add new anecdotes with redux.
+3. ✅ sort with ordered by the number of votes.
+4. ✅ action creator function
+5. ✅ separate component with react and redux
