@@ -6,11 +6,12 @@ import { useDispatch } from "react-redux";
 import React from "react";
 import noteService from "./services/noteService";
 import { setNote } from "./reducers/anecdoteReducer";
+import { initializeNotes } from "./reducers/anecdoteReducer";
 
 const App = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    noteService.getAll().then((notes) => dispatch(setNote(notes)));
+    dispatch(initializeNotes());
   }, []);
   return (
     <div>

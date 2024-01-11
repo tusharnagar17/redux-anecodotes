@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import noteService from "../services/noteService";
 
 const anecdotesAtStart = [
   "If it hurts, do it more often",
@@ -59,5 +60,18 @@ const noteSlice = createSlice({
 
 export const { createNote, increaseVote, appendNote, setNote } =
   noteSlice.actions;
+
+export const initializeNotes = () => {
+  return async (dispatch) => {
+    const notes = await noteService.getAll();
+    dispatch(setNote(notes));
+  };
+};
+export const postNotes = (data) => {
+  return async (dispatch) => {
+    const notes = await noteService.createReq(data);
+    dispatch(createNote(notes));
+  };
+};
 
 export default noteSlice.reducer;

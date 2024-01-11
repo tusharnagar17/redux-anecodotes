@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createNote } from "../reducers/anecdoteReducer";
+import { createNote, postNotes } from "../reducers/anecdoteReducer";
 import { addMessage } from "../reducers/notifyReducer";
 import noteService from "../services/noteService";
+// import { postNotes } from "../reducers/anecdoteReducer";
 
 const AnecodeForm = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,7 @@ const AnecodeForm = () => {
       content: input,
       votes: 0,
     };
-    const postData = await noteService.createReq(data);
-    dispatch(createNote(postData));
+    dispatch(postNotes(data));
     dispatch(addMessage(`New Note has been added: ${input}`));
     setInput("");
   };
