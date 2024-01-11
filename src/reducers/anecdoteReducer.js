@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 const anecdotesAtStart = [
   "If it hurts, do it more often",
@@ -10,6 +11,7 @@ const anecdotesAtStart = [
 ];
 
 const getId = () => (100000 * Math.random()).toFixed(0);
+// const dispatch = useDispatch();
 
 const asObject = (anecdote) => {
   return {
@@ -21,17 +23,6 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject);
 
-// const anecdoteReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case "ADD_NOTE": {
-//       return [...state, action.payload];
-//     }
-//     case "INC_VOTE": {
-//     }
-//     default:
-//       return state;
-//   }
-// };
 const noteSlice = createSlice({
   name: "notes",
   initialState,
@@ -43,8 +34,8 @@ const noteSlice = createSlice({
         id: getId(),
         votes: 0,
       };
-      console.log("new note", newNote);
-      // return [...state, newNote];
+      // console.log("new note", newNote);
+      return [...state, newNote];
     },
     increaseVote(state, action) {
       // console.log(action.payload);
@@ -54,6 +45,7 @@ const noteSlice = createSlice({
         ...NeedChange,
         votes: NeedChange.votes + 1,
       };
+
       return state.map((note) => (note.id !== id ? note : newOne));
     },
   },

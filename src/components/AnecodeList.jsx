@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { increaseVote } from "../reducers/anecdoteReducer";
+import { addMessage } from "../reducers/notifyReducer";
 
 const AnecodeList = () => {
   const anecdotes = useSelector((state) => state.notes);
-  const param = useSelector((state) => state.filters.params);;
+  const param = useSelector((state) => state.filters.params);
 
   const notes = anecdotes.filter((n) =>
     n.content.toLowerCase().includes(param)
@@ -13,6 +14,11 @@ const AnecodeList = () => {
   // sorting as per like
   const sortedData = notes.sort((a, z) => z.votes - a.votes);
   const dispatch = useDispatch();
+
+  const handleVote = (term) => {
+    dispatch(increaseVote(term.id));
+    dispatch(addMessage(`You have voted for: ${term.content}`));
+  };
 
   return (
     <div>
@@ -24,7 +30,7 @@ const AnecodeList = () => {
             has {anecdote.votes}
             <button
               style={{ marginLeft: 5 }}
-              onClick={() => dispatch(increaseVote(anecdote.id))}
+              onClick={() => handleVote(anecdote)}
             >
               {" "}
               vote

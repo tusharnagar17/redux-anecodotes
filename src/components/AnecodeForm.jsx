@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createNote } from "../reducers/anecdoteReducer";
+import { addMessage } from "../reducers/notifyReducer";
 
 const AnecodeForm = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,10 @@ const AnecodeForm = () => {
 
   const formSubmit = (e) => {
     e.preventDefault();
+    // dispatch(addMessage(`new note has been created : ${input}`));
+
     dispatch(createNote(input));
+    dispatch(addMessage(`New Note has been added: ${input}`));
     setInput("");
   };
 
