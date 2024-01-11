@@ -4,7 +4,7 @@ import { increaseVote } from "../reducers/anecdoteReducer";
 
 const AnecodeList = () => {
   const anecdotes = useSelector((state) => state.notes);
-  const param = useSelector((state) => state.filters.params);
+  const param = useSelector((state) => state.filters.params);;
 
   const notes = anecdotes.filter((n) =>
     n.content.toLowerCase().includes(param)
@@ -20,9 +20,12 @@ const AnecodeList = () => {
       {sortedData.map((anecdote) => (
         <div key={anecdote.id}>
           <div>{anecdote.content}</div>
-          <div>
+          <div style={{ padding: 3 }}>
             has {anecdote.votes}
-            <button onClick={() => dispatch(increaseVote(anecdote.id))}>
+            <button
+              style={{ marginLeft: 5 }}
+              onClick={() => dispatch(increaseVote(anecdote.id))}
+            >
               {" "}
               vote
             </button>

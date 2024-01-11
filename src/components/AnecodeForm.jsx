@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { newNote } from "../reducers/anecdoteReducer";
+import { createNote } from "../reducers/anecdoteReducer";
 
 const AnecodeForm = () => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ const AnecodeForm = () => {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    dispatch(newNote(input));
+    dispatch(createNote(input));
     setInput("");
   };
 

@@ -1,18 +1,17 @@
-const filterReducer = (state = { params: "" }, action) => {
-  switch (action.type) {
-    case "SET_FILTER": {
-      return { params: action.payload };
-    }
-    default:
-      return state;
-  }
-};
+import { createSlice } from "@reduxjs/toolkit";
 
-export const searchedText = (data) => {
-  return {
-    type: "SET_FILTER",
-    payload: data,
-  };
-};
+const filterReducer = createSlice({
+  name: "filter",
+  initialState: { params: "" },
+  reducers: {
+    searchedText(state, action) {
+      // console.log("at search text", action.payload);
 
-export default filterReducer;
+      state.params = action.payload;
+    },
+  },
+});
+
+export const { searchedText } = filterReducer.actions;
+
+export default filterReducer.reducer;

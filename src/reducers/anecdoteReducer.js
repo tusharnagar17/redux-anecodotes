@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const anecdotesAtStart = [
   "If it hurts, do it more often",
   "Adding manpower to a late software project makes it later!",
@@ -19,40 +21,44 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject);
 
-const anecdoteReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "ADD_NOTE": {
-      return [...state, action.payload];
-    }
-    case "INC_VOTE": {
-      const id = action.payload.id;
+// const anecdoteReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case "ADD_NOTE": {
+//       return [...state, action.payload];
+//     }
+//     case "INC_VOTE": {
+//     }
+//     default:
+//       return state;
+//   }
+// };
+const noteSlice = createSlice({
+  name: "notes",
+  initialState,
+  reducers: {
+    createNote(state, action) {
+      // console.log(action.payload);
+      const newNote = {
+        content: action.payload,
+        id: getId(),
+        votes: 0,
+      };
+      console.log("new note", newNote);
+      // return [...state, newNote];
+    },
+    increaseVote(state, action) {
+      // console.log(action.payload);
+      const id = action.payload;
       const NeedChange = state.find((n) => n.id === id);
       const newOne = {
         ...NeedChange,
         votes: NeedChange.votes + 1,
       };
       return state.map((note) => (note.id !== id ? note : newOne));
-    }
-    default:
-      return state;
-  }
-};
-
-export const newNote = (input) => {
-  return {
-    type: "ADD_NOTE",
-    payload: {
-      content: input,
-      id: getId(),
-      votes: 0,
     },
-  };
-};
-export const increaseVote = (id) => {
-  return {
-    type: "INC_VOTE",
-    payload: { id },
-  };
-};
+  },
+});
 
-export default anecdoteReducer;
+export const { createNote, increaseVote } = noteSlice.actions;
+
+export default noteSlice.reducer;
