@@ -7,6 +7,9 @@ const AnecodeList = () => {
   const anecdotes = useSelector((state) => state.notes);
   const param = useSelector((state) => state.filters.params);
 
+  console.log("notesReducer value", anecdotes);
+  console.log("parameter used: ", param);
+
   const notes = anecdotes.filter((n) =>
     n.content.toLowerCase().includes(param)
   );
